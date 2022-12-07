@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -10,7 +11,12 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GetRecipies([FromQuery]int count)
         {
-            string[] recipes = { "Buglama", "Chicken", "Donner" };
+            Recipe[] recipes = {
+               new() { Title = "Buglama" },
+               new() { Title = "Lavash" },
+               new() { Title = "Khinkali" }
+            };
+
             if (!recipes.Any())
             { 
                 return NotFound(); 
@@ -19,10 +25,19 @@ namespace WebApplication1.Controllers
         }
 
 
-       // [HttpPost]
-      //  public ActionResult CreateRecipies()
-       
-        
+        [HttpPost]
+        public ActionResult CreateRecipies()
+        {
+            bool badThingsHappened = false;
+
+            if (badThingsHappened)
+                return BadRequest();
+
+            return NoContent();
+
+        }
+
+
 
         [HttpDelete("{id}")]
         public ActionResult DeleteRecipies(string id) 
